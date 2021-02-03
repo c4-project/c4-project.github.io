@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The C4 Project</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>The C4 Project</h1>
+
+        <main>
+            <section>
+                <h2>What is C4?</h2>
+                <p>
+                    C4 is a project to <em>check C compiler concurrency</em>.
+                    The goal is to be able to find bugs in the way <em>real-world</em> compilers implement the C11 memory model.
+                </p>
+                <p>
+                    C4 contains four free and open-source (FOSS) projects:
+
+                    <ul>
+                        <li>
+                            <a href="https://github.com/c4-project/c4f">c4f</a>,
+                            a fuzzer for litmus tests;
+                        </li>
+                        <li>
+                            <a href="https://github.com/c4-project/c4t">c4t</a>,
+                            an automatic runner for compiler test campaigns;
+                        </li>
+                        <li>
+                            <a href="https://github.com/c4-project/c4-corpora">c4-corpora</a>,
+                            a set of Litmus tests pre-generated with
+                            <a href="https://github.com/johnwickerson/memalloy">memalloy</a>;
+                        </li>
+                        <li>
+                            <a href="https://github.com/c4-project/c4-scripts">c4-scripts</a>,
+                            a set of Bash scripts for automating some c4f and c4t
+                            workflows.
+                        </li>
+                    </ul>
+                </p>
+                <p>
+                    Development on C4 was funded as part of the
+                    <a href="https://interfacereasoning.com">Interface Reasoning for Interacting Systems</a>
+                    project.
+                </p>
+            </section>
+        </main>
+    </body>
+</html>

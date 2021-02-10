@@ -142,9 +142,6 @@ h2::before {
     content:"# ";
 }
 
-a {
-    text-decoration: none;
-}
 a:link {
     color: var(--a-main-fg-color);
 }

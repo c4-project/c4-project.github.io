@@ -25,6 +25,7 @@
 
     --border-bg-color:var(--base04);
     --border-fg-color:var(--base01);
+    --border-accent-fg-color:var(--base03);
 
     --accent-bg-color:var(--base02);
 
@@ -49,7 +50,26 @@ body {
 }
 
 header {
+    text-align: center;
     margin: 1rem;
+}
+header>img#logo {
+    width: 14rem;
+}
+header>h1 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+header>h1::before, header>h1::after {
+    content: "**";
+    color: var(--border-accent-fg-color);
+}
+header>h2 {
+    background: none;
+    color: var(--border-accent-fg-color);
+    font-size: 1rem;
+    font-style: italic;
+    margin: 0;
 }
 
 main {

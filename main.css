@@ -111,6 +111,14 @@ dl, pre {
     margin-right: 1rem;
 }
 
+dt {
+    font-style: italic;
+}
+
+ul {
+    list-style-type: square;
+}
+
 pre {
     background-color: var(--pre-bg-color);
     color: var(--pre-fg-color);

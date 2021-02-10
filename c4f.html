@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The C4 Project: c4f</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>c4f</h1>
+            <p>Part of the <a href="index.html">C4 Project</a></p>
+        </header>
+
+        <main>
+            <section id="what-is">
+                <h2>What is c4f?</h2>
+
+                <p>
+                    <abbr title="C4 fuzzer">c4f</abbr>
+                    mutates concurrent C test-cases, presented in the 'litmus test' format.
+                    It performs randomised changes to test-cases that refine the
+                    semantics of the test-case with respect to any observations
+                    over the original variables (for instance, the test's
+                    postcondition).
+                </p>
+
+                <p>
+                    c4f aims to enhance test-cases by introducing 
+                    things that complicate the compiler's analysis.  These
+                    include:
+                </p>
+
+                <ul>
+                    <li>blocks that will never execute, but which the compiler can't safely mark as dead;</li>
+                    <li>harmless control-flow (loops, if, etc) that surround, or are conditional on, atomic actions;</li>
+                    <li>ill-formed and undefined-behaviour-inducing code hidden inside unreachable blocks;</li>
+                    <li>idempotent or otherwise redundant atomic stores and read-modify-writes.</li>
+                </ul>
+
+                <p>
+                    c4f also contains some tools for replaying and bisecting fuzzing runs,
+                    and manipulating C litmus tests.
+                </p>
+
+                <p>
+                    c4f is written in <a href="https://ocaml.org">OCaml</a>,
+                    and licenced predominantly under the
+                    <a href="https://github.com/c4-project/c4f/blob/master/LICENSE">MIT licence</a>
+                    (some parts derive from
+                    <a href="https://github.com/herd/herdtools7">Herdtools7</a>, and are subject to the
+                    terms of its
+                    <a href="https://github.com/c4-project/c4f/blob/master/LICENSE.herd">CECILL-B</a>
+                    licence).
+                </p>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+
+                <ul>
+                    <li>Mutates C litmus tests</li>
+                    <li>Configurable action choice weights and payload generation parameters</li>
+                    <li>Basic support for storing, replaying and bisecting test traces</li>
+                    <li>Ability to 'delitmusify' a litmus test into compilable C</li>
+                    <li>Basic statistics gathering over litmus tests</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Example</h2>
+
+                <p>
+                    Suppose we have the following input litmus test
+                    (taken from <a href="https://raw.githubusercontent.com/c4-project/c4-corpora/master/partialSC/small/test_8.litmus">c4-corpora</a>):
+                </p>
+
+<pre>
+C test_8
+
+{ y = 0; x = 0; }
+
+void
+P0(atomic_int *y, atomic_int *x)
+{
+    int r0 = 0;
+    r0 = atomic_load_explicit(x, memory_order_acquire);
+    if (r0 == 1) { *y = 1; }
+}
+
+void
+P1(atomic_int *y, atomic_int *x)
+{ *y = 2; atomic_store_explicit(x, 1, memory_order_release); }
+
+forall ((0:r0 == 0 /\ x == 1 /\ y == 2) \/ (0:r0 == 1 /\ x == 1 /\ y == 1))
+</pre>
+
+                <p>
+                    c4f might 'fuzz' this test into the following:
+                </p>
+
+<pre>
+C test_8
+
+{ y = 0; x = 0; }
+
+void
+P0(atomic_int *x, atomic_int *y)
+{
+    int volatile r0 = 0;
+    while (!(true || false) &&
+    (0 <= 0 && 0 != -1390224 && 2147483647 != 2147483647))
+    {
+        if
+        (((false ? 2147483647 : -1473764) ^ -131071 & (true ? 268435455 : 0))
+        >=
+        ((false ? 2147483647 : -1473764) ^ -131071 & (true ? 268435455 : 0)))
+        {
+            while ((true || !true && true && !true) <
+            (true || !true && true && !true))
+            {
+                goto robust_bridge;
+                while
+                (((!(0 <
+                        atomic_fetch_or_explicit(x, 0, memory_order_release))
+                    ? 0 > atomic_fetch_or_explicit(y, 0, memory_order_relaxed)
+                    ? r0 : 0 : atomic_load_explicit(x, memory_order_relaxed))
+                    & r0)
+                <= r0)
+                {
+                    r0--;
+                    while (true ||
+                    atomic_fetch_or_explicit(y, 0 | (false ? -5631 : 0),
+                                                memory_order_seq_cst)
+                    ==
+                    atomic_fetch_sub_explicit(y, true ? -870673 & 0 : 0 !=
+                                                2147483647 ? 0 : -19747598,
+                                                memory_order_seq_cst)
+                    &&
+                    (atomic_fetch_sub_explicit(x, 0 - (false ? 0 : 0),
+                                                memory_order_release)
+                        !=
+                        (false ? 0 :
+                        atomic_load_explicit(x, memory_order_seq_cst))
+                        || false))
+                    { goto loud_vice; }
+                    goto robust_bridge;
+                }
+            }
+            goto phone;
+            r0 = r0;
+        } else { r0++; }
+        goto loud_vice;
+        for (; ; )
+        {
+            for (; ; )
+            {
+                do {  } while (!(true && true));
+                while
+                (atomic_fetch_xor_explicit(x, false ? 1 : 0 & 2147483647,
+                                            memory_order_acq_rel)
+                < (true ? 0 & 4 : 92 & 0)) { goto loud_vice; r0--; }
+            }
+            while (!false) {  }
+        }
+        r0++;
+    }
+    while ((false || false) && 0 > 0 && (true ? true : 0 > 0))
+    {
+        goto robust_bridge;
+        while (!(0 == 0) || ((false ? false : false) || !true)) {  }
+        goto loud_vice;
+        for (; ; )
+        {
+            goto robust_bridge;
+            for (; (false ? 32767 : true ? 0 : 0) + ((0 | 0) & 2147483647) ^
+            (atomic_fetch_or_explicit(y, 0, memory_order_release) <= 0 &&
+                true ? 2154366 ^
+                atomic_fetch_add_explicit(x, 0 & 0, memory_order_relaxed) :
+                atomic_load_explicit(x, memory_order_seq_cst) <
+                atomic_fetch_sub_explicit(y, 0, memory_order_acquire) ? 0 : 0)
+            & r0; )
+            {
+                goto loud_vice;
+                if (false ? true : (5493101 != 0 && false) ==
+                (5493101 != 0 && false))
+                {
+                    r0--;
+                    phone: ;
+                    while ((-2147483648 != 0 ? -2147483648 : 0) >
+                    (-2147483648 != 0 ? -2147483648 : 0) &&
+                    ((0 ^ -1) == (-2010 ^ 2147483647) ||
+                        (10995223 == -178051316 ? 40281341 : 0) <=
+                        (0 <= 0 ? 0 : 0) ||
+                        ((-2147483648 | -1048576) == (0 ^ 0) || false)))
+                    {  }
+                } else
+                {
+                    for (; (2147483647 & 0 | 0 & 0 | (0 | 0) & -1) &
+                    atomic_fetch_add_explicit(x, -1 & 0 ^ 0,
+                                                memory_order_release);
+                    ) { goto loud_vice; }
+                }
+                goto loud_vice;
+            }
+        }
+        while (511 < 0 < (511 < 0) ? 0 != -67108864 || (true || false) || 11
+        != 0 : true ? false : 0 != -7) { robust_bridge: ; }
+    }
+    loud_vice: ;
+    r0 = atomic_load_explicit(x, memory_order_acquire);
+    if (r0 == 1) { *y = 1; }
+}
+
+void
+P1(atomic_int *x, atomic_int *y)
+{
+    if ((2147483647 ^ ((5 | -1) ^ (-365418550 ^ -1)) ^ (true ? 0 : -1)) <=
+    (2147483647 ^ ((5 | -1) ^ (-365418550 ^ -1)) ^ (true ? 0 : -1)))
+    {
+        while (false && false && true ? (0 | 24827) != 0 : (0 | -8) !=
+        (0 | -8)) {  }
+        *y = 2;
+        if (true && true && (true && true) ? 0 <= 0 : -8388607 ==
+        (false ? 0 : 0)) { useless_house: ; } else
+        {
+            goto opulent_heap;
+            for (; !true ? 0 : 0 + (true ? 0 : -1048576); )
+            {
+                while (true && true ? !true || true > true : 2147483647 ==
+                (-2147483648 ^ 7328)) {  }
+                while
+                (!(false < false ? true && true : false ? 1 <= -12867131 :
+                    true))
+                {  }
+                roost: ;
+                goto opulent_heap;
+            }
+            goto roost;
+            lane_2: ;
+            for (; (false ? 1646789 : 18296147 & 0) !=
+            atomic_load_explicit(y, memory_order_consume); )
+            {
+                goto fire_11;
+                while (false)
+                {
+                    while
+                    (!(false ||
+                        !((0 <= 0 ?
+                            atomic_fetch_add_explicit(x, 0,
+                                                    memory_order_seq_cst)
+                            : atomic_load_explicit(y, memory_order_consume))
+                            < atomic_load_explicit(x, memory_order_relaxed))))
+                    {
+                        while ((true ? 0 : 0) + (true ? 0 : 0) <=
+                        (-1 & (0 | 0)) ||
+                        atomic_load_explicit(y, memory_order_relaxed) >
+                        ((false ? -204 : 0) &
+                            (false ?
+                            atomic_load_explicit(x, memory_order_relaxed) :
+                            atomic_load_explicit(y, memory_order_seq_cst))
+                            |
+                            atomic_fetch_sub_explicit(y, (true ? 0 : 0) ^ 0 & 0,
+                                                    memory_order_acquire)))
+                        {  }
+                    }
+                    while
+                    ((0 != 0 ? 0 <= -1073741824 && false : false || false) &&
+                    true) { opulent_heap: ; }
+                    goto opulent_heap;
+                }
+            }
+        }
+        while (0 - 0 <= (0 + 0 | 2147483647) <
+        (0 - 0 <= (0 + 0 | 2147483647))) {  }
+        atomic_exchange_explicit(x, 1, memory_order_release);
+        fire_11: ;
+    } else { intern: ; }
+}
+
+forall ((0:r0 == 0 /\ x == 1 /\ y == 2) \/ (0:r0 == 1 /\ x == 1 /\ y == 1))
+</pre>
+            </section>
+        </main>
+    </body>
+</html>

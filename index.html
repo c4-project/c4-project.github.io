@@ -13,36 +13,58 @@
         </header>
 
         <main>
-            <section>
+            <section id="what-is">
                 <h2>What is C4?</h2>
+
                 <p>
                     <abbr title="C Compiler Concurrency Checker">C4</abbr> is a project to <em>check C compiler concurrency</em>.
                     The goal is to be able to find bugs in the way <em>real-world</em> compilers implement the C11 memory model.
                 </p>
-                <p>
-                    C4 contains four free and open-source (FOSS) projects:
 
-                    <ul>
-                        <li>
-                            <a href="https://github.com/c4-project/c4f">c4f</a>,
-                            a fuzzer for litmus tests;
-                        </li>
-                        <li>
-                            <a href="https://github.com/c4-project/c4t">c4t</a>,
-                            an automatic runner for compiler test campaigns;
-                        </li>
-                        <li>
-                            <a href="https://github.com/c4-project/c4-corpora">c4-corpora</a>,
-                            a set of litmus tests pre-generated with
-                            <a href="https://github.com/johnwickerson/memalloy">memalloy</a>;
-                        </li>
-                        <li>
-                            <a href="https://github.com/c4-project/c4-scripts">c4-scripts</a>,
-                            a set of Bash scripts for automating some c4f and c4t
-                            workflows.
-                        </li>
-                    </ul>
+                <p>
+                    C4 contains several free and open-source (FOSS) projects:
                 </p>
+
+                <dl>
+                    <dt><a href="c4f.html">c4f</a></dt>
+                    <dd>
+                        a fuzzer for litmus tests
+
+                        [<a href="https://github.com/c4-project/c4f">github</a>]
+                    </dd>
+
+                    <dt><a href="c4t.html">c4t</a></dt>
+                    <dd>
+                        an automatic runner for compiler test campaigns
+
+                        [<a href="https://github.com/c4-project/c4t">github</a>]
+                    </dd>
+
+                    <dt>c4-corpora</dt>
+                    <dd>
+                        a set of litmus tests pre-generated with
+                        <a href="https://github.com/johnwickerson/memalloy">memalloy</a>
+
+                        [<a href="https://github.com/c4-project/c4-corpora">github</a>]
+                    </dd>
+
+                    <dt>c4-scripts</dt>
+                    <dd>
+                        a set of Bash scripts for automating some c4f and c4t
+                        workflows
+
+                        [<a href="https://github.com/c4-project/c4-scripts">github</a>]
+                    </dd>
+
+                    <dt>mutated-llvm</dt>
+                    <dd>
+                        a copy of LLVM instrumented with run-time selectable,
+                        concurrency-related, mutations
+
+                        [<a href="https://github.com/c4-project/mutated-llvm">github</a>]
+                    </dd>
+                </dl>
+
                 <p>
                     These projects are designed to be used together with
                     a litmus test runner (such as
@@ -53,7 +75,7 @@
             <section>
                 <h2>Acknowledgements</h2>
                 <p>
-                    Development on C4 was funded as part of
+                    Development on C4 was funded from 2018 to 2021 as part of
                     <a href="https://interfacereasoning.com">Interface Reasoning for Interacting Systems</a>.
                 </p>
             </section>

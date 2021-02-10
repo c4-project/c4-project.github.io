@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The C4 Project: c4t</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>c4t</h1>
+            <p>Part of the <a href="index.html">C4 Project</a></p>
+        </header>
+
+        <main>
+            <section id="what-is">
+                <h2>What is c4t?</h2>
+
+                <p>
+                    <abbr title="C4 tester">c4t</abbr>
+                    is a set of tools for running multi-machine, multi-target compiler tests.
+                </p>
+
+                <p>
+                    c4t is designed for use with litmus tests fuzzed by
+                    <a href="c4f.html">c4f</a> and compiled against
+                    <a href="https://diy.inria.fr">litmus7</a>,
+                    but support for other inputs and outputs is a wishlist task.
+                </p>
+
+                <p>
+                    c4t is written in <a href="https://golang.org">Go</a>,
+                    and designed for quick cross-compilation and deployment of
+                    the machine node.  Tests have been run successfully
+                    on macOS (x86-64, AArch64) and GNU/Linux (x86-64, Arm,
+                    AArch64, POWER), with the former three hosting the main
+                    runner and dashboard.
+                </p>
+            </section>
+        </main>
+    </body>
+</html>

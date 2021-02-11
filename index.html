@@ -22,7 +22,22 @@
                 </p>
 
                 <p>
-                    C4 contains several free and open-source (FOSS) projects:
+                    Our approach is based on several key principles:
+                </p>
+
+                <ul>
+                    <li>Interesting concurrency bugs are <emph>nondeterministic</emph>, so our approach is designed around sets of states not singular outcomes</li>
+                    <li>Litmus tests are the <emph>de facto</emph> standard for concurrency testing, so our approach harmonises with them</li>
+                    <li>Test cases should combine both interesting concurrent behaviour and compiler tar-pits</li>
+                    <li>We can get a lot of mileage by using existing tools in unusual ways</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>The C4 subprojects</h2>
+
+                <p>
+                    C4 contains several free and open-source (FOSS) subprojects:
                 </p>
 
                 <dl>
@@ -30,22 +45,29 @@
                     <dd>
                         a fuzzer for litmus tests
 
-                        [<a href="https://github.com/c4-project/c4f">github</a>]
+                        <span class="coderef">
+                            <a href="https://github.com/c4-project/c4f">github</a>; MIT with some CECILL-B code
+                        </span>
                     </dd>
 
                     <dt><a href="c4t.html">c4t</a></dt>
                     <dd>
                         an automatic runner for compiler test campaigns
 
-                        [<a href="https://github.com/c4-project/c4t">github</a>]
+                        <span class="coderef">
+                            <a href="https://github.com/c4-project/c4t">github</a>; MIT
+                        </span>
                     </dd>
 
                     <dt>c4-corpora</dt>
                     <dd>
                         a set of litmus tests pre-generated with
-                        <a href="https://github.com/johnwickerson/memalloy">memalloy</a>
+                        <a href="https://github.com/johnwickerson/memalloy">memalloy</a>,
+                        for use as c4f input
 
-                        [<a href="https://github.com/c4-project/c4-corpora">github</a>]
+                        <span class="coderef">
+                            <a href="https://github.com/c4-project/c4-corpora">github</a>; public domain
+                        </span>
                     </dd>
 
                     <dt>c4-scripts</dt>
@@ -53,7 +75,9 @@
                         a set of Bash scripts for automating some c4f and c4t
                         workflows
 
-                        [<a href="https://github.com/c4-project/c4-scripts">github</a>]
+                        <span class="coderef">
+                            <a href="https://github.com/c4-project/c4-scripts">github</a>; MIT
+                        </span>
                     </dd>
 
                     <dt>mutated-llvm</dt>
@@ -61,7 +85,9 @@
                         a copy of LLVM instrumented with run-time selectable,
                         concurrency-related, mutations
 
-                        [<a href="https://github.com/c4-project/mutated-llvm">github</a>]
+                        <span class="coderef">
+                            <a href="https://github.com/c4-project/mutated-llvm">github</a>; Apache 2.0 with LLVM extensions
+                        </span>
                     </dd>
                 </dl>
 
@@ -70,6 +96,24 @@
                     a litmus test runner (such as
                     <a href="http://diy.inria.fr">litmus7</a>) to run
                     automatic tests against compilers on one or more machines.
+                </p>
+            </section>
+            <section>
+                <h2>Running tests with C4</h2>
+
+                <p>
+                    Documentation on how to use C4 is forthcoming -
+                    watch this space!
+                </p>
+            </section>
+            <section>
+                <h2>Getting involved</h2>
+
+                <p>
+                    We welcome contributions for each of the subprojects, be
+                    they code changes, documentation, or examples and case
+                    studies.  Check each subproject's GitHub repository to find
+                    out more.
                 </p>
             </section>
             <section>

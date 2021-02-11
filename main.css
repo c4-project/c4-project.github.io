@@ -23,16 +23,20 @@
     --main-bg-color: var(--base00);
     --main-fg-color: var(--base05);
 
+    --deemph-fg-color: var(--base04);
+
     --pre-bg-color: var(--base01);
     --pre-fg-color: var(--base06);
 
     /* Everything outside a content bubble */
     --border-bg-color:var(--base04);
     --border-fg-color:var(--base01);
-    --border-accent-fg-color:var(--base03);
     --border-accent-bg-color:var(--base06);
+    --border-accent-fg-color:var(--base03);
 
+    /* Accent variants of the main colours */
     --accent-bg-color:var(--base02);
+    --accent-fg-color:var(--base03);
 
     --a-main-fg-color:var(--base0d);
     --a-visited-fg-color:var(--base0e);
@@ -105,6 +109,22 @@ p {
     margin: 1rem;
 }
 
+/* References to GitHub locations for projects */
+span.coderef {
+    float: right;
+    font-size: 0.9rem;
+    color: var(--deemph-fg-color);
+}
+span.coderef::before, span.coderef::after {
+    color: var(--accent-fg-color);
+}
+span.coderef::before {
+    content: "[";
+}
+span.coderef::after {
+    content: "]";
+}
+
 dl, pre {
     /* So as to be flush with p */
     margin-left: 1rem;
@@ -112,7 +132,12 @@ dl, pre {
 }
 
 dt {
+    clear: both;
     font-style: italic;
+}
+dt::after {
+    color: var(--accent-fg-color);
+    content: " >>";
 }
 
 ul {
@@ -147,6 +172,7 @@ h2 {
     margin: 0;
 }
 h2::before {
+    color: var(--main-bg-color);
     content:"# ";
 }
 

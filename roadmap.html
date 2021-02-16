@@ -51,6 +51,7 @@
                     <li><a href="#actions">Fuzzer actions</a></li>
                     <li><a href="#backends">More backends</a></li>
                     <li><a href="#throughput">Throughput</a></li>
+                    <li><a href="#analysis">Richer analysis</a></li>
                 </ul>
             </section>
             <section id="lang-targets">
@@ -326,7 +327,6 @@
                     </li>
                 </ul>
 
-
                 <p>
                     c4t <em>does</em> have some progress towards a multi-backend
                     setup:
@@ -405,7 +405,7 @@
                     Being a research project, C4 has not been designed with
                     throughput in mind (except for the high degree of
                     parallelism in c4t, and even then there is room for
-                    improvement!)
+                    improvement).
                 </p>
 
                 <p class="suggestion">
@@ -455,6 +455,47 @@
                         that loads small tests in dynamically.)
                     </li>
                 </ul>
+            </section>
+            <section id="analysis">
+                <h2>Richer analysis</h2>
+
+                <p class="hypothesis">
+                    Hypothesis: It will always be the case that, when we write
+                    C4 papers, we need analysis and statistics that C4 doesn't
+                    yet support.
+                </p>
+
+                <p>
+                    c4t has a lot of support for pulling out aggregate metrics,
+                    statistics, saved tests, and other useful artefacts from
+                    test runs.  This support has slowly accumulated over the
+                    process of trying to write papers on C4, where we have
+                    <em>always</em> found that we need more information about
+                    tests than we have on hand.
+                </p>
+
+                <p class="suggestion">
+                    Consider connecting c4t to a SQL database.
+                    <span class="coderef">
+                        c4t
+                        <a href="https://github.com/c4-project/c4t/issues/129">#129</a>
+                    </span>
+                </p>
+
+                <p>
+                    This is a heavyweight suggestion, especially since it
+                    likely introduces either an external dependency or (for
+                    SQLite) a C FFI dependency into c4t, but it is a highly
+                    future-proof and efficient way of handling the problem of
+                    needing rich analysis.
+                </p>
+
+                <p>
+                    Effectively, doing this would replace c4t's current JSON
+                    file based statistics aggregation, and instead have such
+                    requests be served by SQL queries on a database full of
+                    test cycle information.
+                </p>
             </section>
         </main>
     </body>

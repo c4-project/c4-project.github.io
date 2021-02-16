@@ -56,6 +56,7 @@ html {
 
 body {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
     margin: 0;
@@ -63,18 +64,28 @@ body {
 
 header {
     display: inline-block;
-    flex: 1;
+    flex: 1 1 16rem;
+    margin: 1rem;
+}
+aside#diagram {
+    margin: 0 1rem 1rem 1rem;
+    width: 24rem;
+    float: right;
+}
+aside#diagram>object {
+    width: 100%;
+}
 
+header, aside#diagram {
     background-color: var(--border-accent-bg-color);
     border-radius: var(--main-border-radius);
 
-    margin: 1rem;
     padding: 1rem;
     text-align: center;
 }
 header>img#logo {
-    max-width: 15rem;
     width: 80%;
+    max-width: 16rem;
 }
 /* Main page title */
 header>h1 {
@@ -96,7 +107,7 @@ header>p {
 
 main {
     margin: 1rem;
-    flex: 3;
+    flex: 3 1 40rem;
 
     background-color: var(--main-bg-color);
     color: var(--main-fg-color);
@@ -183,6 +194,9 @@ a:visited {
     color: var(--a-visited-fg-color);
 }
 
+section {
+    clear: both;
+}
 section#what-is>h2 {
     /* We'd like this to appear in the outline etc., but not on screen. */
     display: none;

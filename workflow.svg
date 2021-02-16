@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="168mm" height="133mm" viewBox="0 0 168 133" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700');
+</style>
+<marker id="a" overflow="visible" orient="auto">
+<path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
+</marker>
+<marker id="b" overflow="visible" orient="auto">
+<path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
+</marker>
+<marker id="c" overflow="visible" orient="auto">
+<path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
+</marker>
+<marker id="d" overflow="visible" orient="auto">
+<path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
+</marker>
+<marker id="e" overflow="visible" orient="auto">
+<path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
+</marker>
+<marker id="f" overflow="visible" orient="auto">
+<path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
+</marker>
+</defs>
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g transform="translate(-22.95 -42.614)">
+<rect x="23.582" y="113.39" width="166.03" height="61.219" fill="none" stroke="#bdae93" stroke-dasharray="1.265, 1.265" stroke-width="1.265"/>
+<rect x="31.324" y="105.76" width="60.981" height="20.009" fill="#665c54" stroke="#bdae93" stroke-width="1.5875"/>
+<rect x="31.324" y="136.94" width="60.981" height="20.009" fill="#665c54" stroke="#bdae93" stroke-width="1.5875"/>
+<rect x="121.39" y="136.94" width="60.981" height="20.009" fill="#665c54" stroke="#bdae93" stroke-width="1.5875"/>
+<rect x="121.39" y="105.76" width="60.981" height="20.009" fill="#665c54" stroke="#bdae93" stroke-width="1.5875"/>
+<text x="40.852757" y="118.10481" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="40.852757" y="118.10481" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">litmus test</tspan></text>
+<text x="40.852757" y="149.28256" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="40.852757" y="149.28256" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">litmus test</tspan></text>
+<text x="132.92851" y="145.31381" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="132.92851" y="145.31381" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">compilable</tspan><tspan x="132.92851" y="153.25131" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">test</tspan></text>
+<rect x="31.324" y="43.408" width="60.981" height="20.009" fill="#665c54" stroke="#bdae93" stroke-width="1.5875"/>
+<text transform="translate(-12.164 -27.323)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">memory model</tspan></tspan></text>
+<rect x="31.324" y="74.586" width="60.981" height="20.009" fill="#665c54" stroke="#bdae93" stroke-width="1.5875"/>
+<text x="40.782909" y="82.95829" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="40.782909" y="82.95829" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">interesting</tspan><tspan x="40.782909" y="90.89579" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">execution</tspan></text>
+<path d="m61.814 63.417v11.168" fill="#ebdbb2" fill-rule="evenodd" marker-end="url(#b)" stroke="#f2e5bc" stroke-width="1.265"/>
+<path d="m61.814 94.595v11.168" fill="#ebdbb2" fill-rule="evenodd" marker-end="url(#a)" stroke="#f2e5bc" stroke-width="1.265"/>
+<path d="m61.814 125.77v11.168" fill="#ebdbb2" fill-rule="evenodd" marker-end="url(#f)" stroke="#f2e5bc" stroke-width="1.265"/>
+<path d="m92.305 146.95h29.083" fill="#ebdbb2" fill-rule="evenodd" marker-end="url(#e)" stroke="#f2e5bc" stroke-width="1.265"/>
+<path d="m151.35 136.94v-11.168" fill="#ebdbb2" fill-rule="evenodd" marker-end="url(#d)" stroke="#f2e5bc" stroke-width="1.265"/>
+<rect x="121.39" y="74.586" width="60.981" height="20.009" fill="#665c54" stroke="#9d0006" stroke-width="1.5875"/>
+<text x="128.85435" y="86.292038" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="128.85435" y="86.292038" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">possible bug</tspan></text>
+<text x="130.8692" y="117.50791" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="130.8692" y="117.50791" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">binary test</tspan></text>
+<path d="m151.35 105.76v-11.168" fill="#ebdbb2" fill-rule="evenodd" marker-end="url(#c)" stroke="#f2e5bc" stroke-width="1.265"/>
+<text transform="translate(13.919 -11.734)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837-7);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan>memalloy</tspan></tspan></text>
+<text transform="translate(13.919 19.469)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837-7-8);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan>memalloy</tspan></tspan></text>
+<text transform="translate(13.729 51.218)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837-7-8-4);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan>c4f</tspan></tspan></text>
+<text transform="translate(42.105 61.752)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837-7-8-4-9);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan>litmus7</tspan></tspan></text>
+<text transform="translate(102.55 50.398)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837-7-8-4-4);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan>compiler</tspan></tspan></text>
+<text transform="translate(-23.844 87.822)" fill="#f2e5bc" font-family="'IBM Plex Mono'" font-size="6.35px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;shape-inside:url(#rect837-7-8-4-9-8);white-space:pre" xml:space="preserve"><tspan x="51.214844" y="82.449875"><tspan>c4t test cycles</tspan></tspan></text>
+</g>
+</svg>

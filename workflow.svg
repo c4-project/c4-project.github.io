@@ -4,15 +4,15 @@
 <style>
    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700');
 
-   a { fill: #076678; text-decoration: underline; }
-   a:visited { fill: #8f3f71; }
+   a { fill: #83a598; text-decoration: underline; }
+   a:visited { fill: #d3869b; }
    text { font: 7px 'IBM Plex Mono'; fill: #ebdbb2; }
 </style>
 <marker id="a" overflow="visible" orient="auto">
 <path transform="scale(.4)" d="m5.77 0-8.65 5v-10z" fill="#ebdbb2" fill-rule="evenodd" stroke="#f2e5bc" stroke-width="1pt"/>
 </marker>
 </defs>
-<rect x="5" y="66" width="160" height="68" fill="#282828" stroke="#665c54" stroke-dasharray="1.25, 1.25" stroke-width="1.25"/>
+<rect x="5" y="66" width="160" height="68" fill="#3c3836" stroke="#504945" stroke-dasharray="1.25, 1.25" stroke-width="1.25"/>
 
 <rect x="8" y="10" width="60" height="20" fill="#665c54" stroke="#bdae93" stroke-width="1.5"/>
 <rect x="8" y="40" width="60" height="20" fill="#665c54" stroke="#bdae93" stroke-width="1.5"/>

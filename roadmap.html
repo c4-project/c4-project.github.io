@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="main.css" rel="stylesheet">
+        <title>The C4 Project: Roadmap</title>
+        <meta name="description" content="Roadmap for the c4 project.">
+    </head>
+    <body>
+        <header>
+            <h1>Roadmap</h1>
+            <p>for the <a href="index.html">C4 Project</a></p>
+        </header>
+
+        <main>
+            <section id="what-is">
+                <h2>The Roadmap</h2>
+
+                <p>
+                    This page contains a high-level analysis of future
+                    directions for the C4 project.  We provide it as a reference
+                    for potential contributors, or as inspiration for similar
+                    projects; it isn't a promise or guarantee
+                    of future functionality.
+                </p>
+
+                <p>
+                    This page complements the individual projects' GitHub issue
+                    pages, which contain more concrete improvement suggestions.
+                </p>
+
+                <p>
+                    This page (or, at least, this paragraph) was last updated
+                    on
+                    <time datetime="2021-02-16T17:00Z">16 February 2021</time>.
+                </p>
+            </section>
+
+            <section>
+                <h2>Overview</h2>
+
+                <p>
+                    These are the main areas of further work we have
+                    picked out for C4:
+                </p>
+
+                <ul>
+                    <li><a href="#lang-targets">Language targets</a></li>
+                    <li><a href="#delitmus">Beyond Litmus</a></li>
+                    <li><a href="#actions">Fuzzer actions</a></li>
+                    <li><a href="#backends">More backends</a></li>
+                    <li><a href="#throughput">Throughput</a></li>
+                </ul>
+            </section>
+            <section id="lang-targets">
+                <h2>Language targets</h2>
+
+                <p class="hypothesis">
+                    Hypothesis: C is possibly not the best target for
+                    finding bugs in concurrency implementations.
+                </p>
+
+                <p>
+                    Possible reasons why C might not be a good target include:
+                </p>
+
+                <ul>
+                    <li>
+                        conservatism in how C compilers approach atomics (LLVM
+                        has a lot of hard gating adjacent to FIXME comments);
+                    </li>
+                    <li>
+                        maturity of compiler implementation efforts (in general,
+                        and specifically for atomics which are now nearly 10
+                        years old);
+                    </li>
+                    <li>
+                        some compilers we might want to target don't support C
+                        (eg. MSVC).
+                    </li>
+                </ul>
+
+                <p class="suggestion">
+                    Suggestion: consider expanding C4 to handle other languages.
+                </p>
+
+                <p>
+                    The main thing that would need to change is c4f's output
+                    code, which targets a sort-of Litmus/C creole (that both
+                    Litmus7 and c4f-c know how to turn into C), and may need
+                    teaching to target new languages.
+                    See <a href="#delitmus">'Beyond Litmus'</a>.
+                </p>
+
+                <p>
+                    Another thing to bear in mind here is that c4f internally
+                    uses a language called 
+                    <a href="https://github.com/c4-project/c4f/tree/master/lib/fir">FIR</a>,
+                    effectively an ad-hoc C subset with metadata tags and tree
+                    simplifications.  This means that any support c4f has for
+                    output languages needs to fit in the confines of FIR.
+                </p>
+
+                <p>
+                    Possible other languages include:
+                </p>
+                
+                <dl>
+                    <dt>C++ <span class="coderef">c4f <a href="https://github.com/c4-project/c4f/issues/181">#181</a></span></dt>
+                    <dd>
+                        Supporting a subset of C++ that aligns well to c4f's
+                        internal language (FIR) would be relatively
+                        straightforward, and would immediately pay off with
+                        support for compilers such as MSVC which at time of
+                        writing do not support C atomics.  Both C and C++ likely
+                        trigger the same codepaths in compilers, though, so this
+                        won't greatly improve compiler coverage.
+                    </dd>
+
+                    <dt>C++ with transactional extensions</dt>
+                    <dd>
+                        Both c4f's internal language (FIR) and external
+                        Litmus/C output have some support for C++ transactions,
+                        as we considered supporting them at one point.  The
+                        support didn't get finished (partly because it would
+                        imply the same changes needed for targeting C++), and
+                        at time of writing only GCC seems to support C++
+                        transactions, but if this situation changes in the
+                        future then transactional extensions may be interesting
+                        to target.
+                    </dd>
+
+                    <dt>OpenCL</dt>
+                    <dd>
+                        OpenCL's concurrency model is fairly similar to C's,
+                        with additional workgroup partitioning we could
+                        introduce into FIR.  OpenCL compilers are arguably more 
+                        likely to exhibit bugs than C compilers.  Running tests
+                        may require some engineering to replace Litmus with an
+                        OpenCL kernel runner.
+                    </dd>
+
+                    <dt>Rust</dt>
+                    <dd>
+                        Rust targets LLVM, and therefore a lot of LLVM's atomics
+                        set-up, but its use of ownership, move semantics, and
+                        'fearless concurrency' make it an interesting possible
+                        target.  Looking into Rust-on-Cranelift rather than
+                        Rust-on-LLVM may be interesting. 
+                    </dd>
+                </dl>
+            </section>
+
+            <section id="delitmus">
+                <h2>Beyond Litmus</h2>
+
+                <p class="hypothesis">
+                    Hypothesis: we can find more bugs if we target language
+                    that don't fit easily
+                    into the Litmus language.
+                </p>
+
+                <p>
+                    Examples include:
+                </p>
+
+                <ul>
+                    <li>
+                        compound data types (structs, unions, complexes);
+                    </li>
+                    <li>
+                        non-thread functions;
+                    </li>
+                    <li>
+                        thread spawn patterns other than a fixed set of
+                        threads (including compute kernels);
+                    </li>
+                    <li>
+                        returns and other not-quite-Litmus-safe control flow
+                        types.
+                    </li>
+                </ul>
+
+                <p>
+                    Many of these have appeared in concurrency-related bug
+                    reports, and we would like to investigate them (eg. by
+                    adding support for generating them to c4t), but they don't
+                    fit well into the Litmus/C format used in almost every
+                    stage of the pipeline.
+                </p>
+
+                <p>
+                    Another area where we may need to break with Litmus
+                    compatibility is
+                    <a href="#lang-targets">supporting other languages</a>.
+                </p>
+
+                <section>
+                    <p class="suggestion">
+                        Suggestion 1: make C4 carry proprietary Litmus extensions
+                        (and delitmusify them).
+
+                        <span class="coderef">c4f <a href="https://github.com/c4-project/c4f/issues/164">#164</a></span>
+                    </p>
+
+                    <p>
+                        We could extend C4's Litmus/C language such that, while it
+                        remains compatible with input from Memalloy, it has
+                        extensions to capture some of the features above.  This
+                        would break compatibility with Litmus7, and so we might
+                        need to add a shim layer that addresses the
+                        incompatibility or
+                        <a href="#backends">target a different backend</a>.
+                    </p>
+
+                    <p>
+                        c4f already has a rudimentary 'delitmus' command that
+                        converts Litmus/C to C with auxiliary information
+                        condensed into a separate machine-readabler file.  This
+                        could be a good starting point for negotiating between
+                        an extended Litmus/C and backends.
+                    </p>
+                </section>
+
+                <section>
+                    <p class="suggestion">
+                        Suggestion 2: migrate away from litmus entirely.
+                    </p>
+
+                    <p>
+                        A more extreme approach might be to decouple FIR from
+                        Litmus completely, and have c4f take something else as
+                        its main test input and output.  This might be a good
+                        approach, but would require conversion from Memalloy
+                        output (or Memalloy support).
+                    </p>
+                </section>
+            </section>
+
+            <section id="actions">
+                <h2>Fuzzer actions</h2>
+
+                <p class="hypothesis">
+                    Hypothesis: c4f stresses compilers, but would be more useful
+                    if it stressed their concurrency support in a more targeted
+                    manner. 
+                </p>
+
+                <p>
+                    A cheap and easy way of improving C4 is to add more actions
+                    to c4f.  While this requires some programming against c4f's
+                    deep module soup, it is an almost endless source of novelty
+                    and potential bug finding.
+                </p>
+
+                <section>
+                    <p class="suggestion">
+                        Suggestion 1: add concurrency patterns.
+                    </p>
+
+                    <p>
+                        Almost all of c4f's actions at time of writing are
+                        either control-flow related (which, perversely, are not
+                        too bad at finding control-flow bugs!) or introduce
+                        atomic actions in redundant or sequentially-minded
+                        patterns.  There is a lack of actions that actually
+                        graft in atomic action patterns that perform meaningful
+                        if semantically redundant communication between
+                        threads.
+                    </p>
+
+                    <p>
+                        For instance, we could introduce a pattern whereby
+                        a thread is set to spin on a generated variable that is
+                        then changed in another thread.  Failure to perform the
+                        change would cause the thread to spin forever.  (This
+                        would, however, manifest as a run timeout rather than a
+                        flagged result, and so is probably not a useful pattern
+                        in the current C4 setup where run timeouts are not
+                        always indicative of errors).
+                    </p>
+                </section>
+            </section>
+
+            <section id="backends">
+                <h2>Backends</h2>
+
+                <p class="hypothesis">
+                    Hypothesis:
+                    expanding c4t to target more backends will help free up
+                    more possibilities.
+                </p>
+
+                <p>
+                    At time of writing, c4t supports testing via litmus7 only;
+                    while it has basic understanding of how to use simulators
+                    such as herd7 and RMEM, they aren't fully wired into its
+                    testing workflow (mainly because they require more set-up
+                    than just handing
+                    litmus tests to a program).
+                    Supporting other backends would have several advantages:
+                </p>
+
+                <ul>
+                    <li>
+                        Adding simulators to c4t would allow for a trade-off
+                        between exhaustiveness and freedom from machine quirks
+                        on the one hand, and higher turnaround and possibly
+                        greater ISA coverage on the other.
+                    </li>
+                    <li>
+                        Non-Litmus7 simulators may be more amenable to accepting
+                        test-cases that go beyond the usual Litmus test format.
+                    </li>
+                    <li>
+                        Other backends may have useful features, such as partial
+                        results collection or running for a particular amount
+                        of time rather than iterations, that improve throughput
+                        or resilience.
+                    </li>
+                    <li>
+                        Defend against bugs in backends, either by helping us
+                        positively detect them or providing a form of
+                        differential testing.
+                    </li>
+                </ul>
+
+
+                <p>
+                    c4t <em>does</em> have some progress towards a multi-backend
+                    setup:
+                </p>
+                
+                <ul>
+                    <li>
+                        Backend jobs can specify input and output targets (eg,
+                        maps Litmus/C to C, or C to assembly Litmus, etc.), but
+                        most parts of c4t still hardcode in an expectation that
+                        we map from Litmus/C to executables.
+                    </li>
+                    <li>
+                        A backend for running c4f's delitmusifier exists, which
+                        could be useful if c4t learned how to chain backends
+                        (so, it could chain the delitmusifier onto another
+                        backend that expects C).
+                    </li>
+                </ul>
+
+                <p class="suggestion">
+                    Suggestion: support more backends.
+                </p>
+
+                <p>
+                    Some backends that might be nice to support include:
+                </p>
+
+                <dl>
+                    <dt>
+                        <a href="http://diy.inria.fr">herd7</a>
+                    </dt>
+                    <dd>
+                        Well-known simulator for Litmus tests; low coverage of
+                        instruction sets, but mature.
+                    </dd>
+
+                    <dt>
+                        <a href="https://github.com/rems-project/rmem">RMEM</a>
+                    </dt>
+                    <dd>
+                        Also a simulator for Litmus tests; seems more
+                        constrained in which ISAs are supported, but supports
+                        much more of each.  We have experimented with using RMEM
+                        to test with c4f and Memalloy manually, but didn't get
+                        far; there will still need to be some sanitisation of
+                        the output of compilers, loop unrolling etc.
+                        Consider exploring RMEM's ELF input support.
+                    </dd>
+
+                    <dt>
+                        <a href="https://github.com/MattWindsor91/phenolphthalein">phenolphthalein</a>
+                    </dt>
+                    <dd>
+                        Side-project of one of the c4 authors which is trying to
+                        be a replacement for litmus7 in c4-style tests.  At
+                        time of writing, it's not as good at litmus7 for
+                        exploring weak behaviour, nor is it under any semblance
+                        of active or officially sanctioned behaviour.  That
+                        said, it's mentioned on this roadmap in case it could be
+                        useful.
+                    </dd>
+                </dl>
+            </section>
+            <section id="throughput">
+                <h2>Throughput tuning</h2>
+
+                <p class="hypothesis">
+                    Hypothesis:
+                    Throughput is important because of the nondeterministic
+                    nature of both fuzzing and concurrency bugs, and C4's
+                    throughput can be improved.
+                </p>
+
+                <p>
+                    Being a research project, C4 has not been designed with
+                    throughput in mind (except for the high degree of
+                    parallelism in c4t, and even then there is room for
+                    improvement!)
+                </p>
+
+                <p class="suggestion">
+                    Suggestion: re-engineer parts of c4f and c4t for
+                    performance.
+                </p>
+
+                <p>
+                    Concrete areas of improvement include:
+                </p>
+
+                <ul>
+                    <li>
+                        Profiling c4f and c4t.
+                    </li>
+                    <li>
+                        Rewriting, or at least re-architecting, c4f for
+                        efficiency.  Currently, c4f is written in a very
+                        pure/immutable-focused form of OCaml, and this likely
+                        impacts its performance especially where things
+                        construct, traverse, and tear down linked lists.
+                    </li>
+                    <li>
+                        Bin-packing runs of concurrency tests such that, when
+                        a test doesn't exhaust all cores, it can run in parallel
+                        with another test.
+                    </li>
+                    <li>
+                        Removing synchronisation between the test director and
+                        machine node in c4t, such that the director can perform
+                        set-up for the next test cycle while waiting for the
+                        node to run the current one.
+                        <span class="coderef">
+                            c4t <a href="https://github.com/c4-project/c4t/issues/118">#118</a>
+                        </span>
+                    </li>
+                    <li>
+                        Investigating more efficient ways of transferring
+                        tests to, and results from, remote machines.
+                    </li>
+                    <li>
+                        Offloading as much of each test's runtime to the remote
+                        machine as possible, saving on the amount of code that
+                        needs to be copied to remote machines.
+                        (This is one of the design
+                        decisions with phenolphthalein: it has one big runtime
+                        that loads small tests in dynamically.)
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </body>
+</html>
